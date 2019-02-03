@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
-
 {% block title %} home {% endblock %}
 {% block siteheading %} Home Page{% endblock %}
 {% block subheading %} a private blog {% endblock %}
-
+{% block bg %}
+<header class="masthead" style="background-image: url('{{ url_for('static',filename='img/home-bg.jpg')}}')">
+{% endblock %}
 {% block content %}
 <div class="container">
   <div class="row">

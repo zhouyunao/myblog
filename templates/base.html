@@ -33,7 +33,6 @@
         <a class="navbar-brand" href="{{url_for('index')}}">Start Bootstrap</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
-          <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
@@ -44,7 +43,7 @@
               <a class="nav-link" href="{{url_for('about')}}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url_for('post')}}">Sample Post</a>
+              <a class="nav-link" href="{{url_for('new_post')}}">New Post</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url_for('contact')}}">Contact</a>
@@ -55,7 +54,7 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('{{ url_for('static',filename='img/home-bg.jpg')}}')">
+    {% block bg %}{% endblock %}
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -82,14 +81,14 @@
         </div>
       </div>
     </footer>
-
+{% block js %}
     <!-- Bootstrap core JavaScript -->
     <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js')}} "></script>
 
     <!-- Custom scripts for this template -->
     <script src="{{ url_for('static',filename='js/clean-blog.min.js')}} "></script>
-
+{% endblock %}
   </body>
 
 </html>
