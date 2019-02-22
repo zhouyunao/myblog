@@ -3,7 +3,8 @@
 {% block title %} new post {% endblock %}
 {% block style %}
 {{ super() }}
-<link rel="stylesheet" href="{{url_for('static',filename='css/simplemde.min.css')}}">
+<!-- <link rel="stylesheet" href="{{url_for('static',filename='css/simplemde.min.css')}}"> -->
+<link rel="stylesheet" href="{{ url_for('static',filename='plugin/editormd/css/editormd.css') }}"/>
 {% endblock %}
 {% block siteheading %} New Post {% endblock %}
 {% block subheading %} Try to write in markdown {% endblock %}
@@ -13,20 +14,59 @@
 {% block content %}
 
 
-<form method='post' class='form' role='form'>
-      <div class="form-group " style="padding:0px 40px 0px 40px">
+<form method='post' action="{{ url_for('.new_post') }}">
+  <div class="container">
+      <!-- <div class="form-group " style="padding:0px 40px 0px 40px">
         <input class="form-control" id="post_title" name="post_title" type="text" value="" placeholder="タイトル">
       </div>
       <div class="form-group" style="padding:10px 40px 0px 40px">
-        <textarea id="markdown" name="post_content"></textarea>
+        <textarea id="text" name="post_content"></textarea>
       </div>
       <div>
-        <input class='btn btn-defaul' id='publish' name='publish' type='submit' value='Publish' style="padding: 0px 40px 0px 40px;">
-      </div>
-    </form>
+        <input class='btn btn-default' id='publish' name='publish' type='submit' value='Publish' style="padding: 0px 40px 0px 40px;">
+      </div> -->
 
-<script src="{{url_for('static',filename='js/simplemde.min.js')}}"></script>
-<script>
-    var simplemde = new SimpleMDE({ element: document.getElementById("markdown") });
+
+    {{ form.csrf_token }}
+      <!-- <div class="form-group " style="padding:0px 40px 0px 40px"> -->
+    <div class="row" >
+      <!-- <div class="col-md-1">
+        <h4 align="justify">title</h4>
+      </div> -->
+      <div class= "col-md-12">
+        {{ form.title(placeholder="Title",class="form-control") }}
+      </div>
+    </div><br>
+
+      <!-- <div class="form-group" style="padding:10px 40px 0px 40px"> -->
+    <div id="editormd">
+      {{ form.text(style="display:none;") }}
+          <!-- <textarea style="display:none;">### Hello Editor.md !</textarea> -->
+    </div>
+
+      <!-- <input class='btn btn-default' id='publish' name='publish' type='submit' value='Publish' style="padding: 0px 40px 0px 40px;"> -->
+      {{ form.submit(class="btn btn-default") }}
+  </div>
+</form>
+
+
+{% endblock %}
+
+{% block js %}
+{{ super() }}
+<script src="{{url_for('static',filename='plugin/editormd/editormd.js')}}"></script>
+<!-- <script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("text") });
+</script> -->
+<script type="text/javascript">
+  var testEditor;
+  $(function () {
+      testEditor = editormd('editormd', {
+          // width:90%,
+          height: 640,
+          syncScrolling: 'single',
+          path: "{{ url_for('static',filename='plugin/editormd/lib/') }}"
+      });
+  });
 </script>
 {% endblock %}
